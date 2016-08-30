@@ -31,7 +31,6 @@ class TodoList extends Component {
         label="Cancel"
         primary={true}
         onTouchTap={() => {
-          console.log('cancel click');
           this.setState({
             showDeleteConfirm: false,
             currentDeleteId: -1,
@@ -57,8 +56,14 @@ class TodoList extends Component {
         <Dialog
           title="Are you sure?"
           actions={deleteActions}
-          modal={true}
+          modal={false}
           open={this.state.showDeleteConfirm}
+          onRequestClose={() => {
+            this.setState({
+              showDeleteConfirm: false,
+              currentDeleteId: -1,
+            });
+          } }
           contentStyle={{
             maxWidth: 400
           }}
