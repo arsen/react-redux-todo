@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "completed": false,
+    "text": "My cool Todo"
+  },
+  {
+    "id": 1,
+    "completed": false,
+    "text": "Hello Todo"
+  },
+  {
+    "id": 2,
+    "completed": true,
+    "text": "Lets do it"
+  },
+  {
+    "id": 3,
+    "completed": false,
+    "text": "Material-Design rocks"
+  },
+  {
+    "id": 4,
+    "completed": false,
+    "text": "React is cool"
+  },
+  {
+    "id": 5,
+    "completed": true,
+    "text": "Call accountant!"
+  }
+]

@@ -48,6 +48,10 @@ const todos = (state = [], action) => {
         ...state.slice(0, index),
         ...state.slice(index + 1)
       ];
+    case 'TODOS_FETCH_DONE':
+      return [
+        ...action.todos
+      ];
     default:
       return state;
   }

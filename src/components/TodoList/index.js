@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toggleTodo, deleteTodo } from '../../actions';
+import { toggleTodo, deleteTodo, getTodos } from '../../actions';
 
 import ViewTodoList from './TodoList';
 
@@ -29,6 +29,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onTodoDeleteClick: (id) => {
       dispatch(deleteTodo(id));
+    },
+    loadTodos: () => {
+      dispatch(getTodos());
     }
   };
 };

@@ -18,12 +18,16 @@ class TodoList extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.loadTodos();
+  }
+
   render() {
 
     const {
       todos,
       onTodoDoneClick,
-      onTodoDeleteClick
+      onTodoDeleteClick,
     } = this.props;
 
     const deleteActions = [
