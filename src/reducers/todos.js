@@ -19,6 +19,15 @@ const todo = (state, action) => {
   }
 };
 
+const getTodoIndex = (state, id) => {
+  for (let i=0; i<state.length; i++) {
+    if (state[i].id === id) {
+      return i;
+    }
+  }
+  return false;
+};
+
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -30,6 +39,15 @@ const todos = (state = [], action) => {
       return state.map(t =>
         todo(t, action)
       );
+    case 'DELETE_TODO':
+      let index = getTodoIndex(state, action.id);
+      if (index === false) {
+        return state;
+      }
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+      ];
     default:
       return state;
   }
