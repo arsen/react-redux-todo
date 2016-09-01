@@ -12,6 +12,7 @@ module.exports = {
       'material-ui',
       'redux',
       'react-redux',
+      'firebase'
     ]
   },
 

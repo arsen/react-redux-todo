@@ -3,7 +3,7 @@ import firebase from '../firebase';
 export const connectToFirebase = () => {
   return (dispatch) => {
     firebase.ref('/public').on('child_added', (data) => {
-      console.log('child_added', data.val(), data.key);
+      // console.log('child_added', data.val(), data.key);
       let item = {
         id: data.key,
         text: data.val().text,
@@ -16,7 +16,7 @@ export const connectToFirebase = () => {
     });
 
     firebase.ref('/public').on('child_changed', (data) => {
-      console.log('child_changed', data.val());
+      // console.log('child_changed', data.val());
       dispatch({
         type: 'TOGGLE_TODO',
         id: data.key
@@ -24,7 +24,7 @@ export const connectToFirebase = () => {
     });
 
     firebase.ref('/public').on('child_removed', (data) => {
-      console.log('child_removed', data.val());
+      // console.log('child_removed', data.val());
       dispatch({
         type: 'DELETE_TODO',
         id: data.key
@@ -53,7 +53,6 @@ export const deleteTodo = (id) => {
 
 export const toggleTodo = (id, value) => {
   return (dispatch) => {
-    console.log('toggle', id, value);
     let updates = {};
     updates[id + '/completed'] = value;
     firebase.ref('/public').update(updates);
