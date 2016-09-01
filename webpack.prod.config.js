@@ -8,11 +8,23 @@ module.exports = {
     vendors: [
       'react',
       'react-dom',
-      'react-tap-event-plugin',
-      'material-ui',
       'redux',
       'react-redux',
-      'firebase'
+      'redux-thunk',
+      'redux-logger',
+      'firebase',
+      'react-tap-event-plugin',
+      'material-ui/TextField',
+      'material-ui/RaisedButton',
+      'material-ui/styles/MuiThemeProvider',
+      'material-ui/Paper',
+      'material-ui/Tabs',
+      'material-ui/List',
+      'material-ui/Checkbox',
+      'material-ui/svg-icons/action/delete',
+      'material-ui/IconButton',
+      'material-ui/Dialog',
+      'material-ui/FlatButton',
     ]
   },
 
