@@ -1,45 +1,62 @@
-import fetch from 'isomorphic-fetch';
+import firebase from '../firebase';
 
-let nextTodoId = 0;
-
-const todosFetchStart = () => {
-  return {
-    type: 'TODOS_FETCH_START',
-    time: new Date().getTime()
-  };
-};
-
-
-const todosFetchDone = (data) => {
-  return {
-    type: 'TODOS_FETCH_DONE',
-    todos: data,
-    time: new Date().getTime()
-  };
-};
-
-export const getTodos = () => {
+export const connectToFirebase = () => {
   return (dispatch) => {
-    dispatch(todosFetchStart());
-    return fetch('/data.json')
-      .then(response => response.json())
-      .then(json => dispatch(todosFetchDone(json)))
-      .catch(err => dispatch(todosFetchDone([])));
+    firebase.ref('/public').on('child_added', (data) => {
+      console.log('child_added', data.val(), data.key);
+      let item = {
+        id: data.key,
+        text: data.val().text,
+        completed: data.val().completed
+      };
+      dispatch({
+        type: 'ADD_TODO',
+        data: item
+      });
+    });
+
+    firebase.ref('/public').on('child_changed', (data) => {
+      console.log('child_changed', data.val());
+      dispatch({
+        type: 'TOGGLE_TODO',
+        id: data.key
+      });
+    });
+
+    firebase.ref('/public').on('child_removed', (data) => {
+      console.log('child_removed', data.val());
+      dispatch({
+        type: 'DELETE_TODO',
+        id: data.key
+      });
+    });
+
   };
 };
 
 export const addTodo = (text) => {
-  return {
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    text
+  return (dispatch) => {
+    let item = {
+      text,
+      completed: false,
+    };
+    firebase.ref('/public').push(item).key;
   };
 };
 
+
 export const deleteTodo = (id) => {
-  return {
-    type: 'DELETE_TODO',
-    id
+  return (dispatch) => {
+    firebase.ref('/public/'+id).remove();
+  };
+};
+
+export const toggleTodo = (id, value) => {
+  return (dispatch) => {
+    console.log('toggle', id, value);
+    let updates = {};
+    updates[id + '/completed'] = value;
+    firebase.ref('/public').update(updates);
   };
 };
 
@@ -47,12 +64,5 @@ export const setVisibilityFilter = (filter) => {
   return {
     type: 'SET_VISIBILITY_FILTER',
     filter
-  };
-};
-
-export const toggleTodo = (id) => {
-  return {
-    type: 'TOGGLE_TODO',
-    id
   };
 };

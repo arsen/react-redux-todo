@@ -19,7 +19,7 @@ class TodoList extends Component {
   }
 
   componentDidMount() {
-    this.props.loadTodos();
+    this.props.connectToFirebase();
   }
 
   render() {
@@ -78,7 +78,7 @@ class TodoList extends Component {
           {
             todos.map((item) => {
               let checkBox = <Checkbox checked={item.completed} onCheck={(event, isChecked) => {
-                onTodoDoneClick(item.id);
+                onTodoDoneClick(item.id, !item.completed);
               } }/>;
               let deleteButton = (
                 <IconButton onClick={() => {

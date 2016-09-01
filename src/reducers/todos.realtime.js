@@ -1,3 +1,5 @@
+import firebase from '../firebase';
+
 const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -20,7 +22,7 @@ const todo = (state, action) => {
 };
 
 const getTodoIndex = (state, id) => {
-  for (let i=0; i<state.length; i++) {
+  for (let i = 0; i < state.length; i++) {
     if (state[i].id === id) {
       return i;
     }
@@ -33,7 +35,7 @@ const todos = (state = [], action) => {
     case 'ADD_TODO':
       return [
         ...state,
-        todo(undefined, action)
+        action.data,
       ];
     case 'TOGGLE_TODO':
       return state.map(t =>

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toggleTodo, deleteTodo, getTodos } from '../../actions';
+import { toggleTodo, deleteTodo, getTodos, connectToFirebase } from '../../actions';
 
 import ViewTodoList from './TodoList';
 
@@ -24,14 +24,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTodoDoneClick: (id) => {
-      dispatch(toggleTodo(id));
+    onTodoDoneClick: (id, value) => {
+      dispatch(toggleTodo(id, value));
     },
     onTodoDeleteClick: (id) => {
       dispatch(deleteTodo(id));
     },
-    loadTodos: () => {
-      dispatch(getTodos());
+    connectToFirebase: () => {
+      dispatch(connectToFirebase());
     }
   };
 };
